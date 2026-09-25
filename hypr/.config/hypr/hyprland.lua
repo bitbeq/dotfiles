@@ -1,0 +1,7 @@
+require("config.monitors")
+require("config.input")
+require("config.appearance")
+require("config.workspaces")
+require("config.rules")
+require("config.binds")
+require("config.permissions")

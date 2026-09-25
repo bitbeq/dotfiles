@@ -1,0 +1,6 @@
+# Machine-specific Quickshell tooling
+**/.qmlls.ini
+
+# Editor Junk
+**/.DS_Store
+**/*~

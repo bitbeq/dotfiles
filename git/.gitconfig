@@ -1,0 +1,17 @@
+[user]
+	name = Bitbeq
+	email = cole@bitbeq.com
+	useConfigOnly = true
+	signingkey = /home/bitbeq/.ssh/id_ed25519_obsidian_gh_signing.pub
+[init]
+	defaultBranch = main
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[fetch]
+	prune = true
+[gpg "ssh"]
+	allowedSignersFile = /home/bitbeq/.config/git/allowed_signers
