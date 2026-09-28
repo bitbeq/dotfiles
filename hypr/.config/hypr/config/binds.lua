@@ -10,6 +10,7 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("uwsm app -- helium-browser"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("uwsm app -- zeditor"))
+hl.bind(mainMod .. " + space", hl.dsp.exec_cmd("uwsm app -- rofi -show drun"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))

@@ -1,10 +1,188 @@
-add_newline = false
+"$schema" = "https://starship.rs/config-schema.json"
 
-[cmd_duration]
-min_time = 1000
+# =============================================================================
+# Starship
+# =============================================================================
+
+# Separate each prompt from the previous command/output with an empty line.
+add_newline = true
+
+# Maximum time custom commands are allowed to run.
+command_timeout = 500
+
+# Prompt shown when entering a multiline command.
+continuation_prompt = "[·](bright-black) "
+
+# -----------------------------------------------------------------------------
+# Layout
+#
+# ~/Development/snowkoi  main  wt feed  +2 ~1 ?3 ················· obsidian
+# ❯
+# -----------------------------------------------------------------------------
+
+format = "$directory$git_branch${custom.git_worktree}$git_status $fill $hostname$line_break$character"
+
+
+# =============================================================================
+# Directory
+# =============================================================================
 
 [directory]
+format = "[$path]($style)"
+style = "bold cyan"
+
+# Keep enough of the path to provide useful context without taking over
+# the entire prompt.
 truncation_length = 4
+truncate_to_repo = false
+truncation_symbol = "…/"
+
+
+# =============================================================================
+# Git Branch
+# =============================================================================
+
+[git_branch]
+format = " [$branch]($style)"
+style = "bold purple"
+
+# No branch icon; color already differentiates the segment.
+symbol = ""
+
+truncation_length = 40
+truncation_symbol = "…"
+
+
+# =============================================================================
+# Git Worktree
+# =============================================================================
+#
+# Display the linked worktree name only when this checkout is actually a
+# secondary Git worktree.
+#
+# Example:
+#
+# ~/Development/snowkoi-feed  feature/feed  wt feed
+#
+
+[custom.git_worktree]
+command = '''
+gitdir="$(git rev-parse --absolute-git-dir 2>/dev/null)" || exit 1
+basename "$gitdir"
+'''
+
+when = '''
+gitdir="$(git rev-parse --absolute-git-dir 2>/dev/null)" || exit 1
+
+case "$gitdir" in
+  */worktrees/*) exit 0 ;;
+  *)             exit 1 ;;
+esac
+'''
+
+require_repo = true
+shell = ["sh"]
+
+format = " [wt $output]($style)"
+style = "bold yellow"
+
+
+# =============================================================================
+# Git Status
+# =============================================================================
+#
+# Examples:
+#
+# +2     2 staged files
+# ~3     3 modified files
+# ?1     1 untracked file
+# -1     1 deleted file
+# »2     2 renamed files
+# =1     1 conflicted file
+# ≡2     2 stashes
+# ⇡3     3 commits ahead
+# ⇣2     2 commits behind
+#
+# Spaces and colors provide separation instead of pipes, brackets, or
+# decorative separators.
+#
 
 [git_status]
+format = "$all_status$ahead_behind"
+
+conflicted = " [=$count](bold red)"
+stashed = " [≡$count](cyan)"
+deleted = " [-$count](red)"
+renamed = " [»$count](blue)"
+modified = " [~$count](yellow)"
+staged = " [+$count](green)"
+untracked = " [?$count](bright-black)"
+
+ahead = " [⇡${count}](green)"
+behind = " [⇣${count}](yellow)"
+diverged = " [⇡${ahead_count} ⇣${behind_count}](yellow)"
+up_to_date = ""
+
+
+# =============================================================================
+# Fill
+# =============================================================================
+#
+# Fill the space between project information and hostname with subtle dots:
+#
+# ~/snowkoi  main ····································· obsidian
+#
+
+[fill]
+symbol = "·"
+style = "bright-black"
+
+
+# =============================================================================
+# Hostname
+# =============================================================================
+#
+# Always show the machine name:
+#
+# obsidian
+# redstone
+# server-name
+#
+# Username is intentionally not displayed.
+#
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)"
+style = "bold blue"
+
+# obsidian.example.com -> obsidian
+trim_at = "."
+
 disabled = false
+
+
+# =============================================================================
+# Prompt Character
+# =============================================================================
+#
+# Success:
+# ❯
+#
+# Failure:
+# ❯
+#
+# Status is communicated through color instead of changing the symbol.
+#
+
+[character]
+format = "$symbol "
+
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+# Only relevant if you later switch Zsh to vi mode.
+vimcmd_symbol = "[❯](bold yellow)"
+vimcmd_replace_one_symbol = "[❯](bold yellow)"
+vimcmd_replace_symbol = "[❯](bold yellow)"
+vimcmd_visual_symbol = "[❯](bold yellow)"

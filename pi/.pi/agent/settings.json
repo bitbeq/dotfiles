@@ -1,0 +1,7 @@
+{
+  "lastChangelogVersion": "0.87.1",
+  "theme": "dark",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "npmCommand": ["mise", "exec", "node@lts", "--", "npm"]
+}

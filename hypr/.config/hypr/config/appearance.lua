@@ -52,6 +52,10 @@ hl.config({
     animations = {
         enabled = true,
     },
+    xwayland = {
+        -- Fix Blurry Text / XWayland Scaling in Lua
+        force_zero_scaling = true,
+    },
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/

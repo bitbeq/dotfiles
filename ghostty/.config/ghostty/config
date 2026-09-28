@@ -1,0 +1,8 @@
+# Horizontal padding (left and right)
+window-padding-x = 10
+
+# Vertical padding (top and bottom)
+window-padding-y = 10
+
+# Balance any remainder padding evenly across sides (optional but recommended)
+window-padding-balance = true
