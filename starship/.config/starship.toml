@@ -1,0 +1,10 @@
+add_newline = false
+
+[cmd_duration]
+min_time = 1000
+
+[directory]
+truncation_length = 4
+
+[git_status]
+disabled = false
